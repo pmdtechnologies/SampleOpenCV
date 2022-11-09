@@ -82,7 +82,7 @@ will be thrown. After this we **initialize the camera device**.
 
 ### 2 Data Listener Setup
 To setup our custom listener, we first **set its lens parameters**. The listener is of the type MyListener which is a IDepthDataListener, that means it 
-receives the depth data of a camera device. It has a public function [setLensParameters](######setLensParameters) which we use to set the parameters 
+receives the depth data of a camera device. It has a public function [setLensParameters](#setLensParameters) which we use to set the parameters 
 we retrieved from the camera.
 Next we **register the listener** with Royale. 
 
@@ -146,8 +146,8 @@ The next step is to start the capturing of the camera device.
 
 ### 4 Show OpenCV-processed images
 We show the processed images in a while loop. We break out of the loop when the escape-key (keycode 27) gets pressed. If the key "d" is pressed, the undistortion 
-of the image is toggled (see [toggleUndistort](######toggleUndistort) and [cv::undistort documentation](https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html). 
-When the listeners [onNewData](######onNewData) notifies us that new images are available, we display them. 
+of the image is toggled (see [toggleUndistort](#toggleUndistort) and [cv::undistort documentation](https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html). 
+When the listeners [onNewData](#onNewData) notifies us that new images are available, we display them. 
 Shown are four images: the depth image, the blurred gray image, the gray image with canny edge detection and the depth image with canny edge detection. 
 
 When we break out of the while-loop, we stop the capturing and the program finishes.
@@ -186,7 +186,7 @@ define these and the images globally, so that we can access them from all thread
 ```
 
 **On the data listener side this is happening:**
-The processing of the images with OpenCV happens in [onNewData](######onNewData).
+The processing of the images with OpenCV happens in [onNewData](#onNewData).
 
 ###### onNewData
 This public method gets a pointer to the captured Depthdata and will be called for every new frame. Inside this method the images are created and filled
@@ -309,7 +309,7 @@ The public function toggleUndistort sets the value of the boolean `undistortImag
 ```
 
 ###### from depth data to image
-To be able to show the 3D depth data as 2D images, we need to **map to a 2D plane**. This happens in the two lines below (or inside of [onNewData](######onNewData). 
+To be able to show the 3D depth data as 2D images, we need to **map to a 2D plane**. This happens in the two lines below (or inside of [onNewData](#onNewData). 
 The function adjustZValue is part of the MyListener class. Here we assume that every z-value lies between 0 and 2.5 meters (if you need more depth you can adjust 
 this value in the code), if a z-value is bigger than 2.5 meters it will be set to the maximum. 
 The x and y coordinates of the point are discarded. So in the end we fill the images with the adjusted z-value (zImage) and the gray value (grayImage) we derive from it.
