@@ -67,13 +67,17 @@ public :
             float *grayRowPtr = grayImage.ptr<float> (y);
             for (int x = 0; x < zImage.cols; x++, k++)
             {
-                auto curPoint = data->points.at (k);
-                if (curPoint.depthConfidence > 0)
+                auto curX = data->getX(k);
+                auto curY = data->getY(k);
+                auto curZ = data->getZ(k);
+                auto curConf = data->getDepthConfidence(k);
+                auto curGray = data->getGrayValue(k);
+                if (curConf > 0)
                 {
                     // if the point is valid, map the pixel from 3D world
                     // coordinates to a 2D plane (this will distort the image)
-                    zRowPtr[x] = adjustZValue (curPoint.z);
-                    grayRowPtr[x] = static_cast<float> (curPoint.grayValue);
+                    zRowPtr[x] = adjustZValue (curZ);
+                    grayRowPtr[x] = static_cast<float> (curGray);
                 }
             }
         }
