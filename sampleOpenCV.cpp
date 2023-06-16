@@ -7,7 +7,6 @@
  * PARTICULAR PURPOSE.
  *
  \****************************************************************************/
-
 #include <royale.hpp>
 #include <iostream>
 #include <mutex>
@@ -173,7 +172,7 @@ private:
     // the max dist here is used as an example and can be modified
     float adjustZValue (float zValue)
     {
-        float clampedDist = std::min (2.5f, zValue);
+        float clampedDist = std::min<float> (2.5f, zValue);
         float newZValue = clampedDist / 2.5f * 255.0f;
         return newZValue;
     }
