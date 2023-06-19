@@ -5,7 +5,7 @@ This tutorial explains the "sampleOpenCV" which shows how you can use [OpenCV](h
 To run this sample you need to install a Royale binary version and additionaly the OpenCV library. This sample was tested with OpenCV version 4.6.0.
 
 After installing everything, you can start CMake. There you have to set the OpenCV_DIR to your OpenCV installation (e.g. C:/projects/opencv-4.6.0/opencv/build) 
-and the royale_DIR to the share folder of your Royale binary installation (e.g. D:\Program Files\royale\4.23.0.1062\share) and click **Generate**.
+and the royale_DIR to the share folder of your Royale binary installation (e.g. D:\Program Files\royale\5.4.0.2112\lib\cmake) and click **Generate**.
 
 ## Code explanation
 In the beginning we declare a data listener and a camera device. We also declare the platform resources as this will call the CoInitializeEx function on Windows. Otherwise 
