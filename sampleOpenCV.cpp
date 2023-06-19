@@ -7,7 +7,6 @@
  * PARTICULAR PURPOSE.
  *
  \****************************************************************************/
-
 #include <royale.hpp>
 #include <iostream>
 #include <mutex>
@@ -67,13 +66,17 @@ public :
             float *grayRowPtr = grayImage.ptr<float> (y);
             for (int x = 0; x < zImage.cols; x++, k++)
             {
-                auto curPoint = data->points.at (k);
-                if (curPoint.depthConfidence > 0)
+                auto curX = data->getX(k);
+                auto curY = data->getY(k);
+                auto curZ = data->getZ(k);
+                auto curConf = data->getDepthConfidence(k);
+                auto curGray = data->getGrayValue(k);
+                if (curConf > 0)
                 {
                     // if the point is valid, map the pixel from 3D world
                     // coordinates to a 2D plane (this will distort the image)
-                    zRowPtr[x] = adjustZValue (curPoint.z);
-                    grayRowPtr[x] = static_cast<float> (curPoint.grayValue);
+                    zRowPtr[x] = adjustZValue (curZ);
+                    grayRowPtr[x] = static_cast<float> (curGray);
                 }
             }
         }
@@ -169,7 +172,7 @@ private:
     // the max dist here is used as an example and can be modified
     float adjustZValue (float zValue)
     {
-        float clampedDist = std::min (2.5f, zValue);
+        float clampedDist = std::min<float> (2.5f, zValue);
         float newZValue = clampedDist / 2.5f * 255.0f;
         return newZValue;
     }
